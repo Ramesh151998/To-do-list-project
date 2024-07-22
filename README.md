@@ -2,18 +2,9 @@
 
 
 
-Clone
-------------
 
-To clone this app, simply:
 
-```console
-$ git clone https://gitlab.com/BHANUTEJAREDDI/trackx
-```
-No you can go to our repo directory by, simply:
-```console
-$ cd xapparel
-```
+
 Install Global dependencies
 ------------
 
