@@ -1,0 +1,262 @@
+body {
+  margin: 0;
+  background: #f5f5f5;
+  /* scroll-behavior: smooth; */
+  font-family: sans-serif;
+}
+
+.logo {
+  width: 200px;
+}
+
+.logo img {
+  float: left;
+  height: 35px;
+  margin-top: 15px;
+  padding-right: 10px;
+}
+
+.logo h1 {
+  display: inline-block;
+  line-height: 0;
+  vertical-align: middle;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.top-header {
+  -webkit-box-shadow: 3px -5px 20px 0px rgba(0, 0, 0, 0.63);
+  -moz-box-shadow: 3px -5px 20px 0px rgba(0, 0, 0, 0.63);
+  box-shadow: 3px -5px 20px 0px rgba(0, 0, 0, 0.63);
+}
+
+.ant-card {
+  /* box-shadow: 0px 5px 15px -4px rgba(0, 0, 0, 0.63); */
+}
+
+
+.ant-card .ant-card-head {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 38px;
+  margin-bottom: -1px;
+  padding: 0 16px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  background: #959696;
+  border-bottom: 1px solid #f0f0f0;
+  border-radius: 0px 0px 0 0;
+}
+
+/* General Input Field */
+/* .ant-input {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 3px 7px;
+  color: rgba(66, 51, 51, 0.88);
+  font-size: 12px;
+  line-height: 2.1;
+  list-style: none;
+  font-family: 'Nunito', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif';
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  min-width: 0;
+  background-color: #ffffff;
+  background-image: none;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #2c2a2a9c;
+  border-radius: 5px;  
+  transition: all 0.2s;
+}
+
+/* Number Input Field */
+/* .ant-input-number,
+.ant-input-number-input {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 3px 7px;
+  color: rgba(66, 51, 51, 0.88);
+  font-size: 12px;
+  line-height: 2.1;
+  list-style: none;
+  font-family: 'Nunito', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif';
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  min-width: 0;
+  background-color: #ffffff;
+  background-image: none;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #2c2a2a9c;
+  border-radius: 5px;  
+  transition: all 0.2s;
+  border-collapse: collapse;
+} */
+
+/* .ant-input-number-handler-wrap {
+  display: none;
+}  */
+
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 5px grey;  */
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0db1b1;
+  border-radius: 10px;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  /* background: #0dc7c7;  */
+  background: #df4375
+}
+
+/* @media (max-width: 576px) {
+    .ant-layout-content {
+      height: auto !important;
+    }
+  } */
+
+.export-excel-btn {
+  color: #fff;
+  margin-right: 20px;
+  background-color: #088f08;
+  border-color: #088f08;
+  text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+  -webkit-box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+  box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+  border-radius: 4px;
+}
+
+.export-excel-btn:hover,
+.export-excel-btn:focus,
+.export-excel-btn:active,
+.export-excel-btn.active {
+  color: #fff;
+  background-color: rgba(0, 128, 0, 0.9);
+  border-color: rgba(0, 128, 0, 0.9);
+
+}
+
+.export-excel-btn-disabled {
+  color: #fff;
+  margin-right: 20px;
+}
+
+/* Custom styles for the default button state */
+.btn-orange {
+  background-color: #ff8800 !important;
+  border-color: #ff8800 !important;
+  color: #fff !important;
+}
+
+/* Custom styles for the button when hovered */
+.btn-orange:hover {
+  background-color: #ffaa33 !important;
+  border-color: #ffaa33 !important;
+  color: #fff !important;
+}
+
+/* Custom styles for the button when active/pressed */
+.btn-orange:active {
+  background-color: #dd6600 !important;
+  border-color: #dd6600 !important;
+}
+
+/* Custom styles for a secondary button */
+.btn-blue {
+  background-color: #1677ff !important;
+  border-color: #4096ff !important;
+  color: #fff !important;
+}
+
+/* Custom styles for a secondary button when hovered */
+.btn-blue:hover {
+  background-color: #4096ff !important;
+  border-color: #4096ff !important;
+}
+
+/* Custom styles for a secondary button when active/pressed */
+.btn-blue:active {
+  background-color: #0958d9 !important;
+  border-color: #0958d9 !important;
+}
+
+/* Custom styles for a success button */
+.btn-green {
+  background-color: #4caf50 !important;
+  border-color: #4caf50 !important;
+  color: #fff !important;
+}
+
+/* Custom styles for a success button when hovered */
+.btn-green:hover {
+  background-color: #81c784 !important;
+  border-color: #81c784 !important;
+}
+
+/* Custom styles for a success button when active/pressed */
+.btn-green:active {
+  background-color: #388e3c !important;
+  border-color: #388e3c !important;
+}
+
+
+.btn-yellow {
+  background-color: #eec704 !important;
+  border-color: #eec704 !important;
+  color: #fff !important;
+}
+
+/* Custom styles for the warning button when hovered */
+.btn-yellow:hover {
+  background-color: #ffd740 !important;
+  border-color: #ffd740 !important;
+}
+
+/* Custom styles for the warning button when active/pressed */
+.btn-yellow:active {
+  background-color: #b29000 !important;
+  border-color: #b29000 !important;
+}
+
+.orange-button-masters {
+  background-color: #ecf0f0;
+}
+
+.pd5 .ant-card-body {
+  padding: 5px !important;
+}
+
+.ant-input-number-disabled {
+  font-weight: bold;
+  color: black;
+}
+
+.ant-table-wrapper .ant-table-thead>tr>th .ant-table-wrapper .ant-table-thead>tr>td {
+  position: relative;
+  color: #ffffff;
+  font-weight: 600;
+  text-align: start;
+  background: #959696;
+  border-bottom: 1px solid #303030;
+  transition: background 0.2s ease;
+}

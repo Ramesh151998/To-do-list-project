@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+
+.custom-steps .ant-steps {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.88);
+    font-size: 0;
+    line-height: 1.6666666666666667;
+    list-style: none;
+    font-family: 'Nunito', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif';
+    display: flex;
+    width: 100%;
+    text-align: initial;
+}

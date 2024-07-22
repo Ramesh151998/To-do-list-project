@@ -1,0 +1,5 @@
+export enum PaymentMethodEnum{
+    ONLINE_PAYMENT="ONLINE_PAYMENT",
+    CASH_ON_HAND="CASH_ON_HAND",
+    CREDIT_CARD="CREDIT_CARD",
+}
