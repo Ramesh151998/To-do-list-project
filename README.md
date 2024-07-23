@@ -1,20 +1,10 @@
-# Schemax-TrackX
+# Todo-list
 
-Description
-------------
-TrackX, the ultimate end-to-end solution for managing automobile services with unparalleled efficiency and precision. TrackX is designed to streamline every aspect of the automotive service process, from the moment a vehicle enters your facility to the final invoice and gatepass. Our comprehensive suite of tools ensures a seamless experience for both service providers and customers, enhancing productivity, reducing errors, and maximizing customer satisfaction.
-Clone
-------------
 
-To clone this app, simply:
 
-```console
-$ git clone https://gitlab.com/BHANUTEJAREDDI/trackx
-```
-No you can go to our repo directory by, simply:
-```console
-$ cd xapparel
-```
+
+
+
 Install Global dependencies
 ------------
 
