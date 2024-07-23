@@ -19,11 +19,10 @@ const CompanyGrid = () => {
     console.log(id, roles, "LLLLLLLLLLLLLLLLLLL", roles)
     const [visible, setVisible] = useState(false);
 
-
-
     function handleOk() {
         window.location.href = "/";
     }
+
     function handleCancel() {
         setVisible(false);
     }
@@ -40,11 +39,15 @@ const CompanyGrid = () => {
 
     useEffect(() => {
         getTodo();
+        const interval = setInterval(() => {
+            getTodo();
+        }, 10000); 
+
+        return () => clearInterval(interval); 
     }, []);
 
-
     const todolistDel = (todoData: any) => {
-        todoData.isActive = todoData.isActive ? false : true;
+        todoData.isActive = !todoData.isActive;
         service
             .activateOrDeactivateTodo(todoData)
             .then((res) => {
@@ -60,10 +63,7 @@ const CompanyGrid = () => {
             });
     };
 
-
-
     const getTodo = () => {
-        // const req = new DealerIdReqDto(IAMClientAuthContext.dealerCode, IAMClientAuthContext.companyCode)
         service.getTodo()
             .then(res => {
                 if (res.status) {
@@ -77,19 +77,18 @@ const CompanyGrid = () => {
     const drawerOnClose = () => {
         setOpenCompanyFormDrawer(false);
         formRef.resetFields();
-        // getTodo();
     };
 
     const columns = [
         {
             title: 'Task',
             dataIndex: 'task',
-            key: 'Company'
+            key: 'task'
         },
         {
             title: 'Description',
             dataIndex: 'description',
-            key: 'Company'
+            key: 'description'
         },
         {
             title: 'Action',
@@ -98,18 +97,16 @@ const CompanyGrid = () => {
             render: (_, record) => (
                 <>
                     <EditFilled
-                        // hidden={!}   
-
-                        onClick={() => editCompanyData(record)} style={{ fontSize: '20px', color: '#08c', display: !roles.includes('create') ? 'none' : '' }} />
+                        onClick={() => editCompanyData(record)} 
+                        style={{ fontSize: '20px', color: '#08c', display: !roles.includes('create') ? 'none' : '' }} 
+                    />
                     <Divider type="vertical" />
                     <Popconfirm
-                        onConfirm={(e) => {
-                            todolistDel(record);
-                        }}
+                        onConfirm={() => todolistDel(record)}
                         title={
                             record.isActive
-                                ? "Are you sure to Deactivate Department ?"
-                                : "Are you sure to Activate Department?"
+                                ? "Are you sure to Deactivate Task?"
+                                : "Are you sure to Activate Task?"
                         }
                     >
                         <Switch
@@ -131,7 +128,7 @@ const CompanyGrid = () => {
     return (
         <>
             <Card
-                title='Company'
+                title='Tasks'
                 extra={
                     <div>
                         <Button
