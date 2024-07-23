@@ -1,8 +1,8 @@
-import { LaptopOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { LoginService } from '@trackx/shared-services';
-import { Button, Card, Col, Form, Input, Modal, Row } from 'antd';
+import { Button, Card, Checkbox, Col, Form, Input, Modal, Row } from 'antd';
 import axios from 'axios';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const LoginComponent = () => {
@@ -10,40 +10,13 @@ const LoginComponent = () => {
   const [form1] = Form.useForm();
   const navigate = useNavigate();
   const [isAuth, setIsAuth] = useState<any>(false);
-  const [newdata, setNewdata] = useState<any>([]);
+  const [newdata, setNewdata] = useState<any>({ username: '', password: '', todos: [] });
   const [isModalOpen, setIsModalOpen] = useState<any>(false);
   const [editingData, setEditingData] = useState<any>(null);
   const [pswOpen, setPswOpen] = useState<any>(false);
+  const [data, setData] = useState({ username: '', password: '', todos: [] });
 
   const service = new LoginService();
-
-  // const PswClose = () => {
-  //   setPswOpen(false);
-  // };
-
-  // const handleCancel = () => {
-  //   setIsModalOpen(false);
-  //   setNewdata(null);
-  // };
-
-  // const handleOk = () => {
-  //   if (newdata.username == null || newdata.password == null) {
-  //     alert("Please fill all fields...");
-  //   } else {
-  //     axios.post("http://localhost:5000/auth/postdata", {
-  //       username: newdata.username,
-  //       password: newdata.password,
-  //     }).then((res) => {
-  //       if (res.data === false) {
-  //         alert("Username already existed!");
-  //       } else {
-  //         alert("Registered Successfully..");
-  //         setIsModalOpen(false);
-  //         setNewdata(null); 
-  //       }
-  //     });
-  //   }
-  // };
 
   const onFinish = async (data: any) => {
     setIsAuth(true);
@@ -63,56 +36,32 @@ const LoginComponent = () => {
     }
   };
 
-
   const handleOk = () => {
-    if (newdata.username == null || newdata.password == null) {
-      alert("Please fill all fields...")
-    }
-    else {
-      axios.post("http://localhost:5004/auth/createUser", {
-        username: newdata.username,
-        password: newdata.password
-      })
+    if (newdata.username === '' || newdata.password === '') {
+      alert("Please fill all fields...");
+    } else {
+      axios.post("http://localhost:5004/auth/createUser", newdata)
         .then((res) => {
           if (res.data === false) {
-            alert("Username already existed!")
+            alert("Username already existed!");
+          } else {
+            alert("Registered Successfully..");
+            setIsModalOpen(false);
+            setNewdata({ username: '', password: '', todos: [] });
+            form1.resetFields();
           }
-          else {
-            alert("Registered Successfully..")
-            setIsModalOpen(false)
-            setNewdata(null)
-          }
-        })
+        });
     }
-  }
+  };
 
-  const PswClose = () => {
-    setPswOpen(false)
-  }
+  const handleChange = (changedValues, allValues) => {
+    setNewdata(allValues);
+  };
 
   const handleCancel = () => {
-    setIsModalOpen(false)
-    setNewdata(null)
-  }
-
-  const pswOk = () => {
-    if (editingData.newPassword === editingData.confirmPassword) {
-      axios.patch("http://localhost:5004/auth/editdata", {
-        username: editingData.username,
-        password: editingData.newPassword,
-      }).then((res) => {
-        if (res.data === true) {
-          alert("Password changed");
-          setPswOpen(false);
-          setEditingData(null);
-          form1.resetFields();
-        } else {
-          alert("User not found");
-        }
-      });
-    } else {
-      alert("Password and confirm password must be the same");
-    }
+    setIsModalOpen(false);
+    setNewdata({ username: '', password: '', todos: [] });
+    form1.resetFields();
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -129,10 +78,6 @@ const LoginComponent = () => {
         >
           <Form
             form={form}
-            name="basic"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 16 }}
-            initialValues={{ remember: true }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
@@ -167,96 +112,43 @@ const LoginComponent = () => {
                 <Col>
                   <Button type='link' onClick={() => setIsModalOpen(true)}> New Login</Button>
                 </Col>
-                
               </Row>
             </Form.Item>
           </Form>
         </Card>
         <Modal title="New Login" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-          <Form>
-            <Form.Item label="Username">
+          <Form
+            form={form1}
+            onValuesChange={handleChange}
+            initialValues={{ username: '', password: '', todos: [] }}
+          >
+            <Form.Item
+              name="username"
+              label="Username"
+              rules={[{ required: true, message: 'Please input your username!' }]}
+            >
               <Input
                 placeholder='Username'
                 prefix={<UserOutlined />}
-                value={newdata?.username}
-                onChange={(e: any) => {
-                  setNewdata((prev: any) => ({
-                    ...prev,
-                    username: e.target.value,
-                  }));
-                }}
-              />
-            </Form.Item>
-            <Form.Item label="Password">
-              <Input.Password
-                placeholder='Password'
-                prefix={<LockOutlined />}
-                value={newdata?.password}
-                onChange={(e: any) => {
-                  setNewdata((prev: any) => ({
-                    ...prev,
-                    password: e.target.value,
-                  }));
-                }}
-              />
-            </Form.Item>
-          </Form>
-        </Modal>
-        <Modal title="Reset Password" open={pswOpen} onOk={pswOk} onCancel={PswClose}>
-          <Form>
-            <Form.Item label="Username">
-              <Input
-                prefix={<UserOutlined />}
-                placeholder='Username'
-                value={editingData?.username}
-                onChange={(e: any) => {
-                  setEditingData((prev: any) => ({
-                    ...prev,
-                    username: e.target.value,
-                  }));
-                }} 
-              />
-            </Form.Item>
-            <Form.Item label="New Password" name="newPassword" hasFeedback>
-              <Input.Password
-                prefix={<LockOutlined />}
-                placeholder='New password'
-                value={editingData?.newPassword}
-                onChange={(e: any) => {
-                  setEditingData((prev: any) => ({
-                    ...prev,
-                    newPassword: e.target.value,
-                  }));
-                }}
               />
             </Form.Item>
             <Form.Item
-              label="Confirm Password"
-              name="confirmPassword"
-              dependencies={["newPassword"]}
-              rules={[
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    if (!value || getFieldValue("newPassword") === value) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject("Password doesn't match");
-                  },
-                }),
-              ]}
-              hasFeedback
+              name="password"
+              label="Password"
+              rules={[{ required: true, message: 'Please input your password!' }]}
             >
               <Input.Password
+                placeholder='Password'
                 prefix={<LockOutlined />}
-                placeholder='Confirm password'
-                value={editingData?.confirmPassword}
-                onChange={(e: any) => {
-                  setEditingData((prev: any) => ({
-                    ...prev,
-                    confirmPassword: e.target.value,
-                  }));
-                }}
               />
+            </Form.Item>
+            <Form.Item label="Actions" name="todos">
+              <Checkbox.Group>
+                <Checkbox value="create">Create</Checkbox>
+                <Checkbox value="read">Read</Checkbox>
+                <Checkbox value="update">Update</Checkbox>
+                <Checkbox value="delete">Delete</Checkbox>
+              </Checkbox.Group>
             </Form.Item>
           </Form>
         </Modal>
